@@ -5,7 +5,7 @@ function charRes = getChar(I, n)
     %    binaryImg = ~binaryImg;
     %end
     binaryImg = imopen(binaryImg, strel('disk', 2));
-    binaryImg = imclearborder(binaryImg,8);
+    binaryImg = imclearborder(binaryImg, 8);
     binaryImg = bwareaopen(binaryImg, 100);
     L = binaryImg;
     maxSegment = 0;
