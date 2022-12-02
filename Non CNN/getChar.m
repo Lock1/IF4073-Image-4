@@ -1,16 +1,16 @@
-function charRes = getChar(I)
-    binaryImg = imbinarize(I, graythresh(I));
+function charRes = getChar(I, n)
+    binaryImg = imbinarize(I);
     %'NOT' operation for dark font in light background
-    if bwarea(binaryImg) > size(binaryImg,1) * size(binaryImg,2) / 2
-        binaryImg = ~binaryImg;
-    end
-    binaryImg = imerode(binaryImg, strel('disk', 3));
+    %if bwarea(binaryImg) > size(binaryImg,1) * size(binaryImg,2) / 2
+    %    binaryImg = ~binaryImg;
+    %end
+    binaryImg = imopen(binaryImg, strel('disk', 2));
     binaryImg = imclearborder(binaryImg,8);
     binaryImg = bwareaopen(binaryImg, 100);
     L = binaryImg;
     maxSegment = 0;
     segmentSum = 0;
-    for i = 1:36
+    for i = 1:n
         newL = bwareafilt(binaryImg,i);
         newSegmentSum = bwarea(newL);
         newSegmentArea = newSegmentSum - segmentSum;
